@@ -1,11 +1,11 @@
-from Bam import Bam
+from bam import bam
 
 #---"static" variables-------------
 numRows = 4
 numCols = 3
 
 #---main---------------------------
-b = Bam(numRows, numCols)
+b = bam(numRows, numCols)
 print "Row: "+str(b.rowCount)+" Col: "+str(b.colCount)
 input = []
 output = []
