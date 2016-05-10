@@ -5,12 +5,13 @@ from process import *
 num_rows = 135000
 num_cols = 60
 
-if __name__ == '__main__':
-    images = load_images_from_folder (INPUT_DIR)
-    b = Bam(num_rows, num_cols, True)
-    
-    for image in images:
-        bp = get_bipolar_vector(image)
+# Part 1
+def supervised_daydreaming (image, b):
+    print "Hello"
+
+# Part 2
+def unsupervised_daydreaming (image, b):
+    bp = get_bipolar_vector(image)
         # wag muna stochastic as stochastic causes errors
         
         epoch = 10
@@ -25,3 +26,13 @@ if __name__ == '__main__':
             print "Energy: "+str(b.get_energy())
             print "=================="
             bp = bp_new
+
+
+if __name__ == '__main__':
+    images = load_images_from_folder (INPUT_DIR)
+    b = Bam(num_rows, num_cols, True)
+    
+    for image in images:
+        # Comment out whichever won't be used
+        # supervised_daydreaming(image)
+        unsupervised_daydreaming(image, b)
