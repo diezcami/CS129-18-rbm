@@ -3,6 +3,7 @@ import cv2
 INPUT_DIR = 'input/'
 
 def process (img):
+    img = cv2.resize(img, (450,300))
     ret2, th2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
     bipolar_vector = []
     for row in range(th2.shape[0]):
@@ -31,7 +32,7 @@ def load_images_from_folder (folder):
         if img is not None:
             images.append(img)
     return images
-    
+
 if __name__ == '__main__':
     images = load_images_from_folder (INPUT_DIR)
 
