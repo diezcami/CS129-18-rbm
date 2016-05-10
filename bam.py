@@ -1,14 +1,15 @@
+import random as rand
 import numpy as np
 import math as m
 
-class Bam:
-	def __init__(self, n, p):
+class bam:
+	def __init__(self, n, p, random=False):
 		self.energy = self.mean = 0.0
 		self.stdev = 0.1
 		
 		self.rowCount = n
 		self.colCount = p
-		self.weightMatrix = self.makeNewWeightMatrix()
+		self.weightMatrix = self.makeNewWeightMatrix(random)
 		
 	def feedForward(self, input, stochastic=True):
 		result = ( np.mat(input) * np.mat(self.weightMatrix) ).tolist()[0]
@@ -49,8 +50,11 @@ class Bam:
 	def randomGaussian(self):
 		return np.random.normal(self.mean, self.stdev)
 	
-	def makeNewWeightMatrix(self):
-		return [ [0.0]*self.colCount for i in range(self.rowCount) ]
+	def makeNewWeightMatrix(self, random=False):
+		if not random:
+			return [ [0.0]*self.colCount for i in range(self.rowCount) ]
+		else:
+			return [ [rand.randrange(-3, 3) for i in range(self.colCount)] for j in range(self.rowcount)]
 	
 	def printWeightMatrix(self):
 		print np.mat(self.weightMatrix)
