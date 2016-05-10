@@ -23,7 +23,9 @@ if __name__ == '__main__':
     for image in images:
         bp = get_bipolar_vector(image)
         # wag muna stochastic as stochastic causes errors
-        
+		
+        convert_to_image(bp, 'img 1')
+		
         total_differences = 0
         total_distance = 0.0
         iter_count = 1
@@ -59,9 +61,14 @@ if __name__ == '__main__':
             print ""
             total_differences+=count
             total_distance += d
+			
+            convert_to_image(bp, 'rbm ' + str(iter_count))
         
         mean_difference = float(total_differences)/float(iter_count)
         mean_distance = float(total_distance)/float(iter_count)
         print "average difference: "+str(mean_difference)
         print "average distance: "+str(mean_distance)
         print "program execution: "+str(time.time()-start_time)
+		
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()

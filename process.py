@@ -20,7 +20,7 @@ def get_bipolar_vector (img):
             else:
                 bipolar_vector.append(1)
 				
-	#cv2.imshow('bnw',th2)
+	cv2.imshow('bnw',th2)
     return bipolar_vector
 
 # Input: Bipolar Vector
@@ -49,6 +49,10 @@ def load_images_from_folder (folder):
             images.append(img)
     return images
 
+def convert_to_image (bp, st):
+	new_image = get_image(bp)
+	cv2.imshow(st, np.mat(new_image))
+	
 if __name__ == '__main__':
     images = load_images_from_folder (INPUT_DIR)
 
