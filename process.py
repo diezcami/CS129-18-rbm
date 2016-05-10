@@ -2,7 +2,9 @@ import cv2
 
 INPUT_DIR = 'input/'
 
-def process (img):
+# Input: Image
+# Output: Bipolar Vector
+def get_bipolar_vector (img):
     img = cv2.resize(img, (450,300))
     ret2, th2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
     bipolar_vector = []
@@ -13,18 +15,10 @@ def process (img):
                 bipolar_vector.append(-1)
             else:
                 bipolar_vector.append(1)
+    return bipolar_vector
 
-    # 2) Loop through each pixel value and store it in an array
-    # Store 0 as -1, 255 as 1
-    values = []
-    for row in range (len(matrix)):
-        for col in range(len(matrix[0])):
-            if bipolar_vector[row][col] == 255:
-                values.append(1)
-            else:
-                values.append(-1)
-
-# Utility
+# Input: Directory of Images
+# Output: Array of images inside the directory
 def load_images_from_folder (folder):
     images = []
     for filename in os.listdir(folder):
@@ -37,4 +31,4 @@ if __name__ == '__main__':
     images = load_images_from_folder (INPUT_DIR)
 
     for image in images:
-        process (image)
+        bp = get_bipolar_vector (image)
