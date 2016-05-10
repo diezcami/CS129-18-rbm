@@ -2,12 +2,12 @@ import cv2
 from bam import *
 from process import *
 
-numRows = 135000
-numCols = 60
+num_rows = 135000
+num_cols = 60
 
 if __name__ == '__main__':
     images = load_images_from_folder (INPUT_DIR)
-    b = bam(numRows, numCols, True)
+    b = Bam(num_rows, num_cols, True)
     
     for image in images:
         bp = get_bipolar_vector(image)
@@ -17,11 +17,11 @@ if __name__ == '__main__':
         
         for i in range(epoch):
             # bp is the testData
-            bp_prime = b.feedForward(bp, False)
-            bp_new = b.feedBackward(bp_prime, False)
+            bp_prime = b.feed_forward(bp, False)
+            bp_new = b.feed_backward(bp_prime, False)
             
             print "=================="
-            b.computeEnergy(bp_new, bp_prime)
-            print "Energy: "+str(b.getEnergy())
+            b.compute_energy(bp_new, bp_prime)
+            print "Energy: "+str(b.get_energy())
             print "=================="
             bp = bp_new
