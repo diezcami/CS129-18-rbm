@@ -54,7 +54,7 @@ class bam:
 		if not random:
 			return [ [0.0]*self.colCount for i in range(self.rowCount) ]
 		else:
-			return [ [rand.randrange(-3, 3) for i in range(self.colCount)] for j in range(self.rowcount)]
+			return [ [rand.randrange(-1, 1) for i in range(self.colCount)] for j in range(self.rowcount)]
 	
 	def printWeightMatrix(self):
 		print np.mat(self.weightMatrix)
