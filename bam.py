@@ -46,7 +46,7 @@ class bam:
 		
 	def logistic(self, x):
 		return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
-		
+
 	def randomGaussian(self):
 		return np.random.normal(self.mean, self.stdev)
 	
@@ -54,7 +54,7 @@ class bam:
 		if not random:
 			return [ [0.0]*self.colCount for i in range(self.rowCount) ]
 		else:
-			return [ [rand.randrange(-1, 1) for i in range(self.colCount)] for j in range(self.rowcount)]
+			return [ [rand.randrange(-1, 1) for i in range(self.colCount)] for j in range(self.rowCount)]
 	
 	def printWeightMatrix(self):
 		print np.mat(self.weightMatrix)
