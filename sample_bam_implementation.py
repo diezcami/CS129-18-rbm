@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 from bam import bam
+=======
+from bam import *
+>>>>>>> c5203d1b542efcd72e2c006884b4873c6f41e330
 
 #---"static" variables-------------
-numRows = 4
-numCols = 3
+num_rows = 4
+num_cols = 3
 
 #---main---------------------------
+<<<<<<< HEAD
 b = bam(numRows, numCols)
 print "Row: "+str(b.rowCount)+" Col: "+str(b.colCount)
+=======
+b = Bam(num_rows, num_cols)
+print "Row: "+str(b.row_count)+" Col: "+str(b.col_count)
+>>>>>>> c5203d1b542efcd72e2c006884b4873c6f41e330
 input = []
 output = []
 
@@ -23,25 +32,25 @@ output.append( [1, -1, 1] )
 # training
 b.train(input, output)
 print "weight matrix:"
-b.printWeightMatrix()
+b.print_weight_matrix()
 
 # testing
-testData = [1, -1, -1, -1]
+test_data = [1, -1, -1, -1]
 epoch = 10
 
 for i in range(epoch):
 	print "Epoch "+str(i)
-	print "x: "+str(testData)
+	print "x: "+str(test_data)
 	
-	testDataPrime = b.feedForward(testData)
-	print "y: "+str(testDataPrime)
+	test_data_prime = b.feed_forward(test_data)
+	print "y: "+str(test_data_prime)
 	
-	testDataNew = b.feedBackward(testDataPrime)
-	print "x': "+str(testDataNew)
+	test_data_new = b.feed_backward(test_data_prime)
+	print "x': "+str(test_data_new)
 	
 	print "=================="
-	b.computeEnergy(testDataNew, testDataPrime)
-	print "Energy: "+str(b.getEnergy())
+	b.compute_energy(test_data_new, test_data_prime)
+	print "Energy: "+str(b.get_energy())
 	print "=================="
 	
-	testData = testDataNew
+	test_data = test_data_new
