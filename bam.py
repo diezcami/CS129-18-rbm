@@ -12,9 +12,10 @@ class bam:
         self.col_count = p
         self.weight_matrix = self.make_new_weight_matrix(random)
         
+        # # diagnostic to check how many what x's encountered
         # this will count the x's encountered that were to be called in
         # the logistic function.
-        self.x_count = defaultdict(int)
+        # self.x_count = defaultdict(int)
         
     def feedForward(self, input, stochastic=True):
         result = ( np.mat(input) * np.mat(self.weight_matrix) ).tolist()[0]
@@ -57,12 +58,12 @@ class bam:
         # self.weight_matrix = newweight_matrix.tolist()
         
     def logistic(self, x):
-        # self.x_count[x] += 1
-        # return 1-x*x
         try:
             return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
         except OverflowError:
             return float("inf")
+        # self.x_count[x] += 1
+        # return 1-x*x
         
 
     def random_gaussian(self):
