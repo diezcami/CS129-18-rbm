@@ -79,3 +79,10 @@ class bam:
         
     def getEnergy(self):
         return self.energy
+        
+    def check_raw(self):
+        for x in self.weight_matrix:
+            for y in x:
+                if y != 0:
+                    return False
+        return True
