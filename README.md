@@ -8,8 +8,6 @@ Call `python driver.py` to train images in the `training_set/` directory,
 ├── input/
 │   ├── training_set/ : 5 images to be trained
 │   ├── dreaming_set/ : 
-│   │   ├── positives/
-│   │   ├── negatives/
 ├── bam.py : Bidirectional Associative Memory
 ├── driver.py: Driver Class
 ├── training.py: Compilation of modules used to train images
