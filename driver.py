@@ -2,26 +2,44 @@ import cv2
 from bam import *
 from process import *
 
-numRows = 135000
-numCols = 60
-
-if __name__ == '__main__':
-    images = load_images_from_folder (INPUT_DIR)
-    b = bam(numRows, numCols, True)
+num_rows = 135000
+num_cols = 60
     
+if __name__ == '__main__':
+    start_time = time.time()
+    images = load_images_from_folder (INPUT_DIR)
+    
+    # True indicates if a random weight matrix will be initialized.
+    b = bam(num_rows, num_cols)
+    label_of_apple = get_last_label (True, 25) # Uncomment for more general usage
+    # label_of_apple = [1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1]
+    print "Finished retrieving last label"
+
     for image in images:
         bp = get_bipolar_vector(image)
-        # wag muna stochastic as stochastic causes errors
+		
+        convert_to_image(bp, 'img 1')
+		
+        total_differences = 0
+        total_distance = 0.0
+        iter_count = 1
+        max_iter_count = 10
         
-        epoch = 10
+        inputs_to_train = [bp]
+        outputs_to_train = [label_of_apple]
         
-        for i in range(epoch):
-            # bp is the testData
-            bp_prime = b.feedForward(bp, False)
-            bp_new = b.feedBackward(bp_prime, False)
+        while True:
+            print "now at iteration "+str(iter_count)
+            b.train(inputs_to_train, outputs_to_train)
             
-            print "=================="
-            b.computeEnergy(bp_new, bp_prime)
-            print "Energy: "+str(b.getEnergy())
-            print "=================="
-            bp = bp_new
+            if iter_count==max_iter_count:
+                print "--- --- --- --- --- --- --- --- --- --- ---"
+                print "Max number of iterations reached! Stopping."
+                print "Check line 14 of driver.py to change."
+                print "--- --- --- --- --- --- --- --- --- --- ---"
+                break
+            else:
+                iter_count += 1
+            print ""
+        
+        print "program execution: "+str(time.time()-start_time)
