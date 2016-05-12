@@ -91,6 +91,8 @@ if __name__ == '__main__':
             # print "Pls put code here"
             dream(dreaming_set, b, True, 50, True)
             break
+        elif input == '3': # Unsupervised
+            break
         else:
             print "Invalid command."
             input = raw_input()
