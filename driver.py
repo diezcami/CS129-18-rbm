@@ -25,7 +25,7 @@ def train(training_set, b, max_iter_count = 10):
             b.train(inputs_to_train, outputs_to_train)
             iter_count += 1
 
-def dream(dreaming_set, b, print_events = False, max_iter_count = 20):
+def dream(dreaming_set, b, print_events = False, max_iter_count = 20, part_two=False):
     image_count = 1
     for image in dreaming_set:
         print "Dreaming image no. "+str(image_count)
@@ -66,23 +66,34 @@ def dream(dreaming_set, b, print_events = False, max_iter_count = 20):
                 iter_count += 1
         print "Displaying image:"
         convert_to_image(bp, 'Dream Result: ' + str(image_count), True)
+        if part_two:
+            return
 
 if __name__ == '__main__':
     print "Which would you like to perform? (Input 1 or 2)"
     print "[1] Supervised Daydreaming (Part 1)"
     print "[2] Unsupervised Daydreaming (Part 2)"
+    print "[3] Exit"
+    print ""
     input = raw_input()
     training_set = load_images_from_folder (TRAINING_DIR)
     dreaming_set = load_images_from_folder (DREAMING_DIR)
     b = bam(num_rows, num_cols)
-
-    if input == 1: # Supervised
-        print "<-- PART 1/2: TRAINING -->"
-        train (training_set, b)
-        print "<-- PART 2/2: DREAMING -->"
-        dream (dreaming_set, b, True, 5)
-
-    else: # input == 2, Unsupervised
-        print "Pls put code here"
+    
+    while True:
+        if input == '1': # Supervised
+            print "<-- PART 1/2: TRAINING -->"
+            train (training_set, b)
+            print "<-- PART 2/2: DREAMING -->"
+            dream (dreaming_set, b, True, 5)
+            break
+        elif input == '2': # Unsupervised
+            # print "Pls put code here"
+            dream(dreaming_set, b, True, 50, True)
+            break
+        else:
+            print "Invalid command."
+            input = raw_input()
+            
     cv2.waitKey(0)
     cv2.destroyAllWindows()
