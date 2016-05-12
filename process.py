@@ -53,9 +53,10 @@ def load_images_from_folder (folder):
             images.append(img)
     return images
 
-def convert_to_image (bp, st):
+def convert_to_image (bp, st, show_image=False):
 	new_image = get_image(bp)
-	cv2.imshow(st, np.mat(new_image))
+    if show_image:
+        cv2.imshow(st, np.mat(new_image))
 
 # Gets the Euclidean distance between a and b
 def distance(a, b):
@@ -134,8 +135,8 @@ def get_last_label(print_events, max_iter_count = 25):
             print "average distance: " + str(mean_distance)
             print "program execution: " + str(time.time()-start_time)
         
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
     return bp_prime
 
 if __name__ == '__main__':
