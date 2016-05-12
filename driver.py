@@ -65,14 +65,25 @@ def dream(dreaming_set, b, print_events = False, max_iter_count = 20):
                 bp = bp_new
                 iter_count += 1
         print "Displaying image:"
-        convert_to_image(bp, 'Dream Result: ' + str(image_count))
+        convert_to_image(bp, 'Dream Result: ' + str(image_count), True)
 
 if __name__ == '__main__':
-    training_set = load_images_from_folder (TRAINING_DIR)
-    dreaming_set = load_images_from_folder (DREAMING_DIR)
-    b = bam(num_rows, num_cols)
+    print "Which would you like to perform? (Input 1 or 2)"
+    print "[1] Supervised Daydreaming (Part 1)"
+    print "[2] Unsupervised Daydreaming (Part 2)"
+    input = raw_input()
 
-    train (training_set, b)
-    dream (dreaming_set, b, True, 5)
+    if input == 1: # Supervised
+        training_set = load_images_from_folder (TRAINING_DIR)
+        dreaming_set = load_images_from_folder (DREAMING_DIR)
+        b = bam(num_rows, num_cols)
+
+        print "<-- PART 1/2: TRAINING -->"
+        train (training_set, b)
+        print "<-- PART 2/2: DREAMING -->"
+        dream (dreaming_set, b, True, 5)
+
+    else: # input == 2, Unsupervised
+        print "Pls put code here"
     cv2.waitKey(0)
     cv2.destroyAllWindows()
