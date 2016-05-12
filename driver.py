@@ -72,12 +72,11 @@ if __name__ == '__main__':
     print "[1] Supervised Daydreaming (Part 1)"
     print "[2] Unsupervised Daydreaming (Part 2)"
     input = raw_input()
+    training_set = load_images_from_folder (TRAINING_DIR)
+    dreaming_set = load_images_from_folder (DREAMING_DIR)
+    b = bam(num_rows, num_cols)
 
     if input == 1: # Supervised
-        training_set = load_images_from_folder (TRAINING_DIR)
-        dreaming_set = load_images_from_folder (DREAMING_DIR)
-        b = bam(num_rows, num_cols)
-
         print "<-- PART 1/2: TRAINING -->"
         train (training_set, b)
         print "<-- PART 2/2: DREAMING -->"
