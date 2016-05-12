@@ -1,18 +1,17 @@
 # CS 129.18 Final Project: Bidirectional Associative Memory
 
 ## Instructions ##
-Call `python driver.py` to process all the images in the `input/` folder.
+Call `python driver.py` to train images in the `training_set/` directory, 
 
 ## Directory Structure ##
 ```
 ├── input/
-│
-├── bam.py : Main driver file
-├── gabor.py : Feature generation, create test/train CSVs
-├── imgprocess.py : Process images to detect faces
-│
+│   ├── training_set/ : 5 images to be trained
+│   ├── dreaming_set/ : 
+│   │   ├── positives/
+│   │   ├── negatives/
 ├── bam.py : Bidirectional Associative Memory
 ├── driver.py: Driver Class
-├── process.py: Modules to process images and their bipolar vectors
+├── training.py: Compilation of modules used to train images
 ├── sample_bam_implementation: Sample usage of bam.py
 ```
