@@ -18,7 +18,7 @@ if __name__ == '__main__':
     images = load_images_from_folder (INPUT_DIR)
     
     # True indicates if a random weight matrix will be initialized.
-    b = bam(num_rows, num_cols, True)
+    b = Bam(num_rows, num_cols, True)
     
     for image in images:
         bp = get_bipolar_vector(image)
@@ -33,8 +33,8 @@ if __name__ == '__main__':
         
         while True:
             print "now at iteration "+str(iter_count)
-            bp_prime = b.feedForward(bp)
-            bp_new = b.feedBackward(bp_prime)
+            bp_prime = b.feed_forward(bp)
+            bp_new = b.feed_backward(bp_prime)
             
             # count how many elements changed
             count = 0
