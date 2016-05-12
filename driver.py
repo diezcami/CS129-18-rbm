@@ -4,35 +4,42 @@ from process import *
 
 num_rows = 135000
 num_cols = 60
-
-# Part 1
-def supervised_daydreaming (image, b):
-    print "Hello"
-
-# Part 2
-def unsupervised_daydreaming (image, b):
-    bp = get_bipolar_vector(image)
-    # wag muna stochastic as stochastic causes errors
-        
-    epoch = 10
-        
-    for i in range(epoch):
-        # bp is the testData
-        bp_prime = b.feed_forward(bp, False)
-        bp_new = b.feed_backward(bp_prime, False)
-        
-        print "=================="
-        b.compute_energy(bp_new, bp_prime)
-        print "Energy: "+str(b.get_energy())
-        print "=================="
-        bp = bp_new
-
-
-if __name__ == '__main__':
-    images = load_images_from_folder (INPUT_DIR)
-    b = Bam(num_rows, num_cols, True)
     
+if __name__ == '__main__':
+    start_time = time.time()
+    images = load_images_from_folder (INPUT_DIR)
+    
+    # True indicates if a random weight matrix will be initialized.
+    b = bam(num_rows, num_cols)
+    label_of_apple = get_last_label (True, 25) # Uncomment for more general usage
+    # label_of_apple = [1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1]
+    print "Finished retrieving last label"
+
     for image in images:
-        # Comment out whichever won't be used
-        # supervised_daydreaming(image)
-        unsupervised_daydreaming(image, b)
+        bp = get_bipolar_vector(image)
+		
+        convert_to_image(bp, 'img 1')
+		
+        total_differences = 0
+        total_distance = 0.0
+        iter_count = 1
+        max_iter_count = 10
+        
+        inputs_to_train = [bp]
+        outputs_to_train = [label_of_apple]
+        
+        while True:
+            print "now at iteration "+str(iter_count)
+            b.train(inputs_to_train, outputs_to_train)
+            
+            if iter_count==max_iter_count:
+                print "--- --- --- --- --- --- --- --- --- --- ---"
+                print "Max number of iterations reached! Stopping."
+                print "Check line 14 of driver.py to change."
+                print "--- --- --- --- --- --- --- --- --- --- ---"
+                break
+            else:
+                iter_count += 1
+            print ""
+        
+        print "program execution: "+str(time.time()-start_time)
