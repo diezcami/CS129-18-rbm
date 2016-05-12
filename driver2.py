@@ -6,6 +6,8 @@ from process import *
 num_rows = 135000
 num_cols = 60
 
+label_of_apple = [1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1]
+
 # gets the euclidean distance between two vectors a and b
 def distance(a, b):
     dist = 0.0
@@ -29,7 +31,7 @@ if __name__ == '__main__':
         total_differences = 0
         total_distance = 0.0
         iter_count = 1
-        max_iter_count = 10
+        max_iter_count = 50
         
         while True:
             print "now at iteration "+str(iter_count)
@@ -54,6 +56,11 @@ if __name__ == '__main__':
                 print "Max number of iterations reached! Stopping."
                 print "See max_iter_count in driver2.py to change."
                 print "--- --- --- --- --- --- --- --- --- --- ---"
+                convert_to_image(bp, 'rbm ' + str(iter_count))
+                print "-----    label   -----"
+                print bp_prime
+                print "----- last image -----"
+                print bp_new
                 break
             else:
                 bp = bp_new
@@ -62,7 +69,6 @@ if __name__ == '__main__':
             total_differences+=count
             total_distance += d
 			
-            convert_to_image(bp, 'rbm ' + str(iter_count))
         
         mean_difference = float(total_differences)/float(iter_count)
         mean_distance = float(total_distance)/float(iter_count)

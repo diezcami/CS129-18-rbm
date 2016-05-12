@@ -43,16 +43,27 @@ class bam:
         self.energy = -1 * e
     
     def train(self, input, output):
-        newweight_matrix = np.mat(self.weight_matrix)
-        for pair in zip(input, output):
-            m2 = np.mat(zip(pair[0])) * np.mat(pair[1])
-            newweight_matrix += m2
-        self.weight_matrix = newweight_matrix.tolist()
+        for i in range(len(input)):
+            sample_in = input[i]
+            sample_out = output[i]
+            
+            for r in range(self.row_count):
+                for c in range(self.col_count):
+                    self.weight_matrix[r][c] += sample_in[r] * sample_out[c]
+        # newweight_matrix = np.mat(self.weight_matrix)
+        # for pair in zip(input, output):
+            # m2 = np.mat(zip(pair[0])) * np.mat(pair[1])
+            # newweight_matrix += m2
+        # self.weight_matrix = newweight_matrix.tolist()
         
     def logistic(self, x):
-        self.x_count[x] += 1
-        return 1-x*x
-        # return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
+        # self.x_count[x] += 1
+        # return 1-x*x
+        try:
+            return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
+        except OverflowError:
+            return float("inf")
+        
 
     def random_gaussian(self):
         return np.random.normal(self.mean, self.stdev)
