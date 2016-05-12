@@ -1,21 +1,13 @@
-<<<<<<< HEAD
-from bam import bam
-=======
 from bam import *
->>>>>>> c5203d1b542efcd72e2c006884b4873c6f41e330
 
 #---"static" variables-------------
 num_rows = 4
 num_cols = 3
 
 #---main---------------------------
-<<<<<<< HEAD
-b = bam(numRows, numCols)
-print "Row: "+str(b.rowCount)+" Col: "+str(b.colCount)
-=======
 b = Bam(num_rows, num_cols)
 print "Row: "+str(b.row_count)+" Col: "+str(b.col_count)
->>>>>>> c5203d1b542efcd72e2c006884b4873c6f41e330
+
 input = []
 output = []
 
