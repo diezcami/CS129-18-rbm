@@ -46,7 +46,8 @@ class Bam:
 		self.weight_matrix = new_weight_matrix.tolist()
 		
 	def logistic(self, x):
-		return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
+		return 1 - x*x
+		# return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
 
 	def random_gaussian(self):
 		return np.random.normal(self.mean, self.stdev)
