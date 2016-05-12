@@ -70,7 +70,6 @@ def distance(a, b):
 # Output: Last label of the processed image
 def get_last_label(image, b, max_iter_count = 10):
     print "Get_Last_Label: Beginning"
-    images = load_images_from_folder (TRAINING_DIR)
     bp = get_bipolar_vector(image)        
     total_differences = 0
     total_distance = 0.0

@@ -54,16 +54,18 @@ def dream(dreaming_set, b, print_events = False, max_iter_count = 20):
             if distance(bp_new, bp) < 1:
                 if print_events:
                     print "Dreaming: Distance is less than 1 - done!"
-                convert_to_image(bp, 'Dream Result: ' + str(iter_count))
+                #convert_to_image(bp, 'Dream Result: ' + str(iter_count))
                 break
             elif iter_count==max_iter_count:
                 if print_events:
                     print "Dreaming: Maximum iterations reached!"
-                convert_to_image(bp, 'Dream Result: ' + str(iter_count))
+                #convert_to_image(bp, 'Dream Result: ' + str(image_count))
                 break
             else:
                 bp = bp_new
                 iter_count += 1
+        print "Displaying image:"
+        convert_to_image(bp, 'Dream Result: ' + str(image_count))
 
 if __name__ == '__main__':
     training_set = load_images_from_folder (TRAINING_DIR)
@@ -71,6 +73,6 @@ if __name__ == '__main__':
     b = bam(num_rows, num_cols)
 
     train (training_set, b)
-    dream (dreaming_set, b, True)
+    dream (dreaming_set, b, True, 5)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
