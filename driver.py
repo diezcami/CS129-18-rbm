@@ -12,13 +12,13 @@ if __name__ == '__main__':
     # True indicates if a random weight matrix will be initialized.
     b = bam(num_rows, num_cols)
     label_of_apple = get_last_label (True, 25) # Uncomment for more general usage
-    # label_of_apple = [1, 1, 1, -1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, 1]
     print "Finished retrieving last label"
 
+    filecount = 0
     for image in images:
         bp = get_bipolar_vector(image)
 		
-        convert_to_image(bp, 'img 1')
+        convert_to_image(bp, 'img '+count)
 		
         total_differences = 0
         total_distance = 0.0
