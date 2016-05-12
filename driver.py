@@ -82,17 +82,19 @@ if __name__ == '__main__':
     
     while True:
         if input == '1': # Supervised
+            b = bam(num_rows, num_cols)
             print "<-- PART 1/2: TRAINING -->"
             train (training_set, b)
             print "<-- PART 2/2: DREAMING -->"
             dream (dreaming_set, b, True, 5)
             break
         elif input == '2': # Unsupervised
-            # print "Pls put code here"
+            if b.is_raw():
+                b = bam(num_rows, num_cols, True)
             dream(dreaming_set, b, True, 50, True)
             break
         elif input == '3': # Unsupervised
-            break
+            exit
         else:
             print "Invalid command."
             input = raw_input()
