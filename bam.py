@@ -12,6 +12,8 @@ class Bam:
         self.col_count = p
         self.weight_matrix = self.make_new_weight_matrix(random)
         
+        self.x_count = defaultdict(int)
+        
     def feed_forward(self, input, stochastic=True):
         result = ( np.mat(input) * np.mat(self.weight_matrix) ).tolist()[0]
         # result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)

@@ -64,11 +64,11 @@ if __name__ == '__main__':
                         bp[i] = -1
                     else:
                         bp[i] = bp[i-1]
-                convert_to_image(bp, 'rbm ' + str(iter_count))
                 break
             else:
                 bp = bp_new
                 iter_count += 1
+            convert_to_image(bp, 'rbm ' + str(iter_count))
             print ""
             total_differences+=count
             total_distance += d
