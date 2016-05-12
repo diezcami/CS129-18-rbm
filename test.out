@@ -1,0 +1,46 @@
+now at iteration 1
+88223 out of 135000 features are different.
+distance is 594.047136177
+
+now at iteration 2
+332 out of 135000 features are different.
+distance is 36.4417343166
+
+now at iteration 3
+317 out of 135000 features are different.
+distance is 35.6089876295
+
+now at iteration 4
+326 out of 135000 features are different.
+distance is 36.1109401705
+
+now at iteration 5
+321 out of 135000 features are different.
+distance is 35.8329457343
+
+now at iteration 6
+296 out of 135000 features are different.
+distance is 34.4093010682
+
+now at iteration 7
+306 out of 135000 features are different.
+distance is 34.9857113691
+
+now at iteration 8
+311 out of 135000 features are different.
+distance is 35.2703841771
+
+now at iteration 9
+303 out of 135000 features are different.
+distance is 34.8137903711
+
+now at iteration 10
+302 out of 135000 features are different.
+distance is 34.756294394
+--- --- --- --- --- --- --- --- --- --- ---
+Max number of iterations reached! Stopping.
+See max_iter_count in driver2.py to change.
+--- --- --- --- --- --- --- --- --- --- ---
+average difference: 9073.5
+average distance: 87.7520931013
+program execution: 25.7320001125
