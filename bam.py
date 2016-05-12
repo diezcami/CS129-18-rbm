@@ -14,19 +14,60 @@ class Bam:
         
     def feed_forward(self, input, stochastic=True):
         result = ( np.mat(input) * np.mat(self.weight_matrix) ).tolist()[0]
+        # result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)
         if stochastic:
-            result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)
+            result[0] = 1 if self.logistic(result[0]) > self.random_gaussian() else -1
+            for i in range(1,len(result)):
+                a = self.logistic(result[i])
+                b = self.random_gaussian()
+                if a>b:
+                    result[i] = 1
+                elif a<b:
+                    result[i] = -1
+                else:
+                    result[i] = result[i-1]
         else:
-            result = map(lambda x: 1 if x>0 else -1, result)
+            # result = map(lambda x: 1 if x>0 else -1, result)
+            result[0] = 1 if result[0]>0 else -1
+            for i in range(1,len(result)):
+                if result[i] > 0:
+                    result[i] = 1
+                elif result[i] < 0:
+                    result[i] = -1
+                else:
+                    result[i] = result[i-1]
         return result
     
     def feed_backward(self, output, stochastic=True):
         result = ( np.mat(output) * np.mat(zip(*self.weight_matrix)) ).tolist()[0]
+        # result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)
         if stochastic:
-            result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)
+            result[0] = 1 if self.logistic(result[0]) > self.random_gaussian() else -1
+            for i in range(1,len(result)):
+                a = self.logistic(result[i])
+                b = self.random_gaussian()
+                if a>b:
+                    result[i] = 1
+                elif a<b:
+                    result[i] = -1
+                else:
+                    result[i] = result[i-1]
         else:
-            result = map(lambda x: 1 if x>0 else -1, result)
+            # result = map(lambda x: 1 if x>0 else -1, result)
+            result[0] = 1 if result[0]>0 else -1
+            for i in range(1,len(result)):
+                if result[i] > 0:
+                    result[i] = 1
+                elif result[i] < 0:
+                    result[i] = -1
+                else:
+                    result[i] = result[i-1]
         return result
+        # if stochastic:
+            # result = map(lambda x: 1 if self.logistic(x) > self.random_gaussian() else -1, result)
+        # else:
+            # result = map(lambda x: 1 if x>0 else -1, result)
+        # return result
         
     # note: the source code of sir happy originally said
     #   weight_matrix[r][c]input.at(r) * input.at(c)
@@ -46,8 +87,12 @@ class Bam:
         self.weight_matrix = new_weight_matrix.tolist()
         
     def logistic(self, x):
-        return 1 - x*x
-        # return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
+        self.x_count[x] += 1
+        return 1-x*x
+        # try:
+            # return float("inf") if x==0 else 1.0/(1.0-(m.exp(-x)))
+        # except OverflowError:
+            # return float("inf")
 
     def random_gaussian(self):
         return np.random.normal(self.mean, self.stdev)

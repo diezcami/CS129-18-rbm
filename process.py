@@ -26,7 +26,6 @@ def get_bipolar_vector (img):
 # Input: Bipolar Vector
 # Output: Image (Matrix)
 def get_image (bipolar_vector):
-    # Tae annoying nito forever amp - andre
     image_vector = np.zeros((height, width), np.float32)
     bv_index = 0 
     for row in range(image_vector.shape[0]):

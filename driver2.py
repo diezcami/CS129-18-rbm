@@ -22,14 +22,13 @@ if __name__ == '__main__':
     
     for image in images:
         bp = get_bipolar_vector(image)
-        # wag muna stochastic as stochastic causes errors
 		
         convert_to_image(bp, 'img 1')
 		
         total_differences = 0
         total_distance = 0.0
         iter_count = 1
-        max_iter_count = 10
+        max_iter_count = 100
         
         while True:
             print "now at iteration "+str(iter_count)
@@ -46,7 +45,7 @@ if __name__ == '__main__':
             # numerically determine how different they are based on euclidean dist.
             d = distance(bp_new, bp)
             print "distance is "+str(d)
-            if distance(bp_new, bp) < 1:
+            if d < 1:
                 print "stopped at iteration "+str(iter_count)
                 break
             elif iter_count==max_iter_count:
@@ -54,6 +53,18 @@ if __name__ == '__main__':
                 print "Max number of iterations reached! Stopping."
                 print "See max_iter_count in driver2.py to change."
                 print "--- --- --- --- --- --- --- --- --- --- ---"
+                # convert to bipolar only here, after all the feeding forward and feeding backward
+                bp[0] = 1 if b.logistic(bp[0]) > b.random_gaussian() else -1
+                for i in range(len(bp[1:])):
+                    x = b.logistic(bp[i])
+                    y = b.random_gaussian()
+                    if x > y:
+                        bp[i] = 1
+                    elif x < y:
+                        bp[i] = -1
+                    else:
+                        bp[i] = bp[i-1]
+                convert_to_image(bp, 'rbm ' + str(iter_count))
                 break
             else:
                 bp = bp_new
@@ -61,8 +72,6 @@ if __name__ == '__main__':
             print ""
             total_differences+=count
             total_distance += d
-			
-            convert_to_image(bp, 'rbm ' + str(iter_count))
         
         mean_difference = float(total_differences)/float(iter_count)
         mean_distance = float(total_distance)/float(iter_count)
