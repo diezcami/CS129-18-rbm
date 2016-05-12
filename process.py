@@ -55,8 +55,8 @@ def load_images_from_folder (folder):
 
 def convert_to_image (bp, st, show_image=False):
 	new_image = get_image(bp)
-    if show_image:
-        cv2.imshow(st, np.mat(new_image))
+	if show_image:
+		cv2.imshow(st, np.mat(new_image))
 
 # Gets the Euclidean distance between a and b
 def distance(a, b):
@@ -68,10 +68,10 @@ def distance(a, b):
 # ASSUMPTION: There's only one image in the input folder
 # Input: True if you want the events printed, false otherwise
 # Output: Last label of the processed image
-def get_last_label(print_events, max_iter_count = 25):
+def get_last_label(print_events, max_iter_count = 25, folder_name="for training/"):
     start_time = time.time()
-    images = load_images_from_folder (INPUT_DIR)
-    
+    images = load_images_from_folder (INPUT_DIR+folder_name)
+    print "length of images: "+str(len(images))
     # True indicates if a random weight matrix will be initialized.
     b = bam(num_rows, num_cols, True)
     
